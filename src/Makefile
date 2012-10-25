@@ -1,17 +1,18 @@
 BUILD = ../build
 CPP = g++
 CPPFLAGS = -Wall -Wextra
-SRC = ./AQueue
 
 
-time_test: ./TimingTests/TimeTest.cpp Queue.o
-	$(CPP) $(CPPFLAGS) -o time_test ./TimingTests/TimeTest.cpp Queue.o
+$(BUILD)/AArray.o: AArray/TwoDArray.h AArray/TwoDArray.cpp
+	$(CPP) $(CPPFLAGS) -c AArray/TwoDArray.cpp
 
-Queue.o: $(SRC)/Queue.h $(SRC)/Queue.cpp
-	$(CPP) $(CPPFLAGS) -c $(SRC)/Queue.cpp
+
+$(BUILD)/SArray.o: SArray/TwoDArray.h SArray/TwoDArray.cpp
+	$(CPP) $(CPPFLAGS) -c SArray/TwoDArray.cpp
+
+
+$(BUILD)/VArray.o: VArray/TwoDArray.h VArray/TwoDArray.cpp
+	$(CPP) $(CPPFLAGS) -c VArray/TwoDArray.cpp
 
 clean:
-	rm -f $(SRC)/*.o
 	rm -f *.o
-	rm -f *~
-	rm -f time_test
