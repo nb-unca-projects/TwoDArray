@@ -1,5 +1,6 @@
 #include "TwoDArray.h"
 #include <string>
+#include <iostream>
 
 template <typename T>
 TwoDArray<T>::TwoDArray(int r, int c, T def) {
@@ -34,7 +35,13 @@ void TwoDArray<T>::remove(int r, int c){
 }
 template <typename T>
 void TwoDArray<T>::print(){
-
+  for (int i=0; i<rows; ++i) {
+    std::cout << "[";
+    for (int k=0; k<cols-1; ++k) {
+      std::cout << theArray[i][k] << ", ";
+    }
+    std::cout << theArray[i][cols-1] << "]" << std::endl;
+  }
 }
 template <typename T>
 int TwoDArray<T>::getNumRows() {
