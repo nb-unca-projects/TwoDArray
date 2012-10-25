@@ -14,34 +14,34 @@ TwoDArray<T>::TwoDArray(int r, int c, T def) {
     }
   }
 }
-
+template <typename T>
 TwoDArray<T>::~TwoDArray(){
   delete theArray;
 }
-
+template <typename T>
 void TwoDArray<T>::insert(int r, int c, T value) {
   theArray[r][c] = value;
 }
-
+template <typename T>
 T TwoDArray<T>::access(int r, int c){
   T result;
   result = theArray[r][c];
   return result;
 }
-
+template <typename T>
 void TwoDArray<T>::remove(int r, int c){
   theArray[r][c] = defaultValue;
 }
-
+template <typename T>
 void TwoDArray<T>::print(){
 
 }
-
+template <typename T>
 int TwoDArray<T>::getNumRows() {
   return rows;
 }
-
-int TwoDArray<T>getNumCols() {
+template <typename T>
+int TwoDArray<T>::getNumCols() {
   return cols;
 }
 
