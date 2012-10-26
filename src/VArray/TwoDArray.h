@@ -8,7 +8,7 @@ class TwoDArray {
     int rows;
     int cols;
     T defaultValue;
-    std::vector< std::vector<T> >* theArray;
+    std::vector< std::vector<T> > theArray;
 
   public:
     TwoDArray(int r, int c, T def);

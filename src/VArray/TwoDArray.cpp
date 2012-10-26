@@ -9,10 +9,11 @@ TwoDArray<T>::TwoDArray(int r, int c, T def){
   rows = r;
   cols = c;
   defaultValue = def;
-  theArray = new std::vector< std::vector<T> >();
+  theArray = std::vector< std::vector<T> >(r, std::vector<T>(c,def));
+
   for (int i=0; i<r; ++i){
     for (int j=0; j<c; ++j){
-      theArray->at(r).at(c) = def;
+      theArray.at(i).at(j) = def;
     }
   }
 }
@@ -24,30 +25,30 @@ template <typename T>
 void TwoDArray<T>::insert(int r, int c, T value){
   assert(r<rows);
   assert(c<cols);
-  theArray->at(r).at(c) = value;
+  theArray.at(r).at(c) = value;
 }
 template <typename T>
 T TwoDArray<T>::access(int r, int c){
   assert(r<rows);
   assert(c<cols);
   T result;
-  result = theArray->at(r).at(c);
+  result = theArray.at(r).at(c);
   return result;
 }
 template <typename T>
 void TwoDArray<T>::remove(int r, int c) {
   assert(r<rows);
   assert(c<cols);
-  theArray->at(r).at(c) = defaultValue;
+  theArray.at(r).at(c) = defaultValue;
 }
 template <typename T>
 void TwoDArray<T>::print() {
   for (int i=0; i<rows; ++i) {
     std::cout << "[";
     for (int k=0; k<cols-1; ++k) {
-      std::cout << theArray->at(i).at(k) << ", ";
+      std::cout << theArray.at(i).at(k) << ", ";
     }
-    std::cout << theArray->at(i).at(cols-1) << "]" << std::endl;
+    std::cout << theArray.at(i).at(cols-1) << "]" << std::endl;
   }
 }
 template <typename T>
