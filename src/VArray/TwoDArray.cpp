@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <assert.h>
 
 template <typename T>
 TwoDArray<T>::TwoDArray(int r, int c, T def){
@@ -21,16 +22,22 @@ TwoDArray<T>::~TwoDArray(){
 }
 template <typename T>
 void TwoDArray<T>::insert(int r, int c, T value){
+  assert(r<rows);
+  assert(c<cols);
   theArray->at(r).at(c) = value;
 }
 template <typename T>
 T TwoDArray<T>::access(int r, int c){
+  assert(r<rows);
+  assert(c<cols);
   T result;
   result = theArray->at(r).at(c);
   return result;
 }
 template <typename T>
 void TwoDArray<T>::remove(int r, int c) {
+  assert(r<rows);
+  assert(c<cols);
   theArray->at(r).at(c) = defaultValue;
 }
 template <typename T>
