@@ -1,14 +1,16 @@
 #ifndef __TWODARRAY_H__
 #define __TWODARRAY_H__
 
+#include "Node.h"
+
 template <typename T>
 class TwoDArray {
   private:
     int rows;
     int cols;
     T defaultValue;
-    Node<T>* rowArray;
-    Node<T>* colArray;
+    Node<T>** rowArray;
+    Node<T>** colArray;
 
   public:
     TwoDArray<T>(int r, int c, T def);

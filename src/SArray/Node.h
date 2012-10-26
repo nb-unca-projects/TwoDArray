@@ -18,8 +18,8 @@ class Node {
     int getCol();
     void setNextDown(Node<T>* nd);
     void setNextRight(Node<T>* nr);
-    Node<T>* getNextDown():
-    Node<T>* getNextRight():
+    Node<T>* getNextDown();
+    Node<T>* getNextRight();
 };
 
 #endif
