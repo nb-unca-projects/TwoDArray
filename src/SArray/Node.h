@@ -13,6 +13,7 @@ class Node {
   public:
     Node<T>(int r, int c, T v);
     ~Node<T>();
+    void setValue(T v);
     T getValue();
     int getRow();
     int getCol();

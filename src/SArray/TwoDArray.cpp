@@ -8,7 +8,11 @@ TwoDArray<T>::TwoDArray(int r, int c, T def) {
   cols = c;
   defaultValue = def;
   rowArray = new Node<T>*[r];
-  colArray = new Node<T>*[c];  
+  for (int i=0; i<r; ++i)
+    rowArray[i] = 0;
+  colArray = new Node<T>*[c];
+  for (int j=0; j<c; ++j)
+    colArray[j] = 0;  
 }
 template <typename T>
 TwoDArray<T>::~TwoDArray() {
@@ -18,10 +22,23 @@ template <typename T>
 void TwoDArray<T>::insert(int r, int c, T value) {
   assert(r<rows && r>=0);
   assert(c<cols && c>=0);
-  Node<T>* n = new Node<T>(r, c, value);
   
-  delete n;
-}
+  Node<T>* beforeRow = rowArray[r];
+  Node<T>* currRow = rowArray[r];
+  Node<T>* beforeCol = colArray[c];
+  Node<T>* currCol = colArray[c];  
+  while (currRow->getNextRight() != 0 && currRow->getCol() != c) {
+    beforeRow = currRow;
+    currRow = currRow->getNextRight();
+  }
+  while (currCol->getNextDown() != 0 && currCol->getRow() != r) {
+    beforeCol = currCol;
+    currCol = currCol->getNextDown();
+  }
+  Node<T>* newNode = new Node<T>(r, c, value);
+  currRow->setNextRight(newNode);
+  currCol->setNextDown(newNode);
+}  
 template <typename T>
 T TwoDArray<T>::access(int r, int c) {
   assert(r<rows && r>=0);

@@ -12,6 +12,10 @@ Node<T>::~Node(){
 
 }
 template <typename T>
+void Node<T>::setValue(T v){
+  value = v;
+}
+template <typename T>
 T Node<T>::getValue() {
   return value;
 }
