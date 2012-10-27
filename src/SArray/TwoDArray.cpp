@@ -1,6 +1,7 @@
 #include "TwoDArray.h"
 #include <string>
 #include <assert.h>
+#include <iostream>
 
 template <typename T>
 TwoDArray<T>::TwoDArray(int r, int c, T def) {
@@ -8,11 +9,16 @@ TwoDArray<T>::TwoDArray(int r, int c, T def) {
   cols = c;
   defaultValue = def;
   rowArray = new Node<T>*[r];
-  for (int i=0; i<r; ++i)
-    rowArray[i] = 0;
+  //segmentation fault workaround
+  for (int i=0; i<r; ++i) {
+    rowArray[i] = new Node<T>(0,0,0);
+    rowArray[i]->setNextRight(0);
+  }
   colArray = new Node<T>*[c];
-  for (int j=0; j<c; ++j)
-    colArray[j] = 0;  
+  for (int j=0; j<c; ++j) {
+    colArray[j] = new Node<T>(0,0,0);
+    colArray[j]->setNextDown(0);
+  }
 }
 template <typename T>
 TwoDArray<T>::~TwoDArray() {
@@ -23,21 +29,37 @@ void TwoDArray<T>::insert(int r, int c, T value) {
   assert(r<rows && r>=0);
   assert(c<cols && c>=0);
   
-  Node<T>* beforeRow = rowArray[r];
-  Node<T>* currRow = rowArray[r];
-  Node<T>* beforeCol = colArray[c];
-  Node<T>* currCol = colArray[c];  
-  while (currRow->getNextRight() != 0 && currRow->getCol() != c) {
+  Node<T>* beforeRow = rowArray[r]->getNextRight();
+  std::cout << beforeRow << std::endl;
+  //Node<T>* currRow = rowArray[r];
+  Node<T>* beforeCol = colArray[c]->getNextDown();
+  //Node<T>* currCol = colArray[c];
+  //the empty case
+ // if (currRow == 0 && currCol == 0) {
+  std::cout << "hello!" << std::endl;
+    Node<T>* newNode = new Node<T>(r, c, value);
+
+  std::cout << "hello!" << std::endl;
+    beforeRow->setNextRight(newNode);
+  std::cout << "hello!" << std::endl;
+    beforeCol->setNextDown(newNode);
+  std::cout << "yes!" << std::endl;
+ /* } else {
+  
+  while (currRow->getNextRight() != 0 
+	&& currRow->getCol() != c) {
     beforeRow = currRow;
     currRow = currRow->getNextRight();
   }
-  while (currCol->getNextDown() != 0 && currCol->getRow() != r) {
+  while (currCol->getNextDown() != 0 
+	&& currCol->getRow() != r) {
     beforeCol = currCol;
     currCol = currCol->getNextDown();
   }
   Node<T>* newNode = new Node<T>(r, c, value);
   currRow->setNextRight(newNode);
   currCol->setNextDown(newNode);
+  } //end else*/
 }  
 template <typename T>
 T TwoDArray<T>::access(int r, int c) {
@@ -91,5 +113,5 @@ int TwoDArray<T>::getNumCols(){
 }
 
 template class TwoDArray<int>;
-template class TwoDArray<double>;
-template class TwoDArray<std::string>;
+//template class TwoDArray<double>;
+//template class TwoDArray<std::string>;

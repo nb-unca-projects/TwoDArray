@@ -45,5 +45,5 @@ Node<T>* Node<T>::getNextRight() {
 }
 
 template class Node<int>;
-template class Node<double>;
-template class Node<std::string>;
+//template class Node<double>;
+//template class Node<std::string>;

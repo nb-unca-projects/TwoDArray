@@ -20,8 +20,8 @@ array_test: ArrayTest.cpp $(SRCA)/TwoDArray.o $(GTEST_MAINA)
 vector_test: VectorTest.cpp $(SRCV)/TwoDArray.o $(GTEST_MAINA)
 	$(CPP) $(CFLAGS) $(GTEST_INCLUDES) -pthread -o vector_test VectorTest.cpp $(SRCV)/TwoDArray.o $(GTEST_MAINA)
 
-sparse_test: SparseTest.cpp $(SRCS)/TwoDArray.o $(GTEST_MAINA)
-	$(CPP) $(CFLAGS) $(GTEST_INCLUDES) -pthread -o sparse_test SparseTest.cpp $(SRCS)/TwoDArray.o $(GTEST_MAINA)
+sparse_test: SparseTest.cpp $(SRCS)/Node.o $(SRCS)/TwoDArray.o $(GTEST_MAINA)
+	$(CPP) $(CFLAGS) $(GTEST_INCLUDES) -pthread -o sparse_test SparseTest.cpp $(SRCS)/Node.o $(SRCS)/TwoDArray.o $(GTEST_MAINA)
 
 $(GTEST_MAINA): $(GTEST)/src/*.cc $(GTEST)/src/*.h
 	cd $(GTEST)/make; make
