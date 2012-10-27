@@ -3,11 +3,8 @@
 #include <iostream> 
 
 TEST(TwoDArrayTest, insert) {
-  std::cout << "1" << std::endl;
   TwoDArray<int>* td = new TwoDArray<int>(10, 10, 0);
-  std::cout << "2" << std::endl;
   td->insert(5, 4, 10);
-  std::cout << "3" << std::endl;
   td->insert(5, 5, 9);
   td->insert(5, 6, 8);
 

@@ -6,6 +6,8 @@ Node<T>::Node(int r, int c, T v) {
   row = r;
   col = c;
   value = v;
+  down = 0;
+  right = 0;
 }
 template <typename T>
 Node<T>::~Node(){

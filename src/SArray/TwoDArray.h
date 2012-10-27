@@ -2,6 +2,7 @@
 #define __TWODARRAY_H__
 
 #include "Node.h"
+#include <vector>
 
 template <typename T>
 class TwoDArray {
@@ -9,8 +10,8 @@ class TwoDArray {
     int rows;
     int cols;
     T defaultValue;
-    Node<T>** rowArray;
-    Node<T>** colArray;
+    std::vector< Node<T>* > rowArray;
+    std::vector< Node<T>* > colArray;
 
   public:
     TwoDArray<T>(int r, int c, T def);

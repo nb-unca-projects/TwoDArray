@@ -2,24 +2,16 @@
 #include <string>
 #include <assert.h>
 #include <iostream>
+#include <vector>
 
 template <typename T>
 TwoDArray<T>::TwoDArray(int r, int c, T def) {
   rows = r;
   cols = c;
   defaultValue = def;
-  rowArray = new Node<T>*[r];
-  //segmentation fault workaround
-  for (int i=0; i<r; ++i) {
-    rowArray[i] = new Node<T>(0,0,0);
-    rowArray[i]->setNextRight(0);
+  rowArray = std::vector< Node<T>* >(r, new Node<T>(0,0,0));
+  colArray = std::vector< Node<T>* >(c, new Node<T>(0,0,0));
   }
-  colArray = new Node<T>*[c];
-  for (int j=0; j<c; ++j) {
-    colArray[j] = new Node<T>(0,0,0);
-    colArray[j]->setNextDown(0);
-  }
-}
 template <typename T>
 TwoDArray<T>::~TwoDArray() {
 
@@ -30,21 +22,15 @@ void TwoDArray<T>::insert(int r, int c, T value) {
   assert(c<cols && c>=0);
   
   Node<T>* beforeRow = rowArray[r]->getNextRight();
-  std::cout << beforeRow << std::endl;
-  //Node<T>* currRow = rowArray[r];
+  Node<T>* currRow = rowArray[r]->getNextRight()
   Node<T>* beforeCol = colArray[c]->getNextDown();
-  //Node<T>* currCol = colArray[c];
+  Node<T>* currCol = colArray[c]->getNextDown();
   //the empty case
- // if (currRow == 0 && currCol == 0) {
-  std::cout << "hello!" << std::endl;
+  if (currRow == 0 && currCol == 0) {
     Node<T>* newNode = new Node<T>(r, c, value);
-
-  std::cout << "hello!" << std::endl;
     beforeRow->setNextRight(newNode);
-  std::cout << "hello!" << std::endl;
     beforeCol->setNextDown(newNode);
-  std::cout << "yes!" << std::endl;
- /* } else {
+  } else {
   
   while (currRow->getNextRight() != 0 
 	&& currRow->getCol() != c) {
